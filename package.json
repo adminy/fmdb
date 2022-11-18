@@ -1,6 +1,6 @@
 {
   "name": "@adminy/fmdb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fastify MariaDB plugin",
   "main": "index.js",
   "author": "Marin Bivol <marin.bivol@fourtheorem.com>",
