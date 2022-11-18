@@ -20,5 +20,8 @@
   "publishConfig": {
     "registry":"https://npm.pkg.github.com/",
     "access": "public"
-  }
+  },
+  "homepage": "https://github.com/adminy/fmdb#readme",
+  "bugs": { "url": "https://github.com/adminy/fmdb/issues" },
+  "repository": { "type": "git", "url": "git+https://github.com/adminy/fmdb.git" }
 }
