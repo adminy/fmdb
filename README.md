@@ -2,8 +2,8 @@
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 ![CI](https://github.com/victor0801x/fastify-mariadb/workflows/CI/badge.svg)
-[![npm version](https://img.shields.io/npm/v/fastify-mariadb.svg?style=flat)](https://www.npmjs.com/package/fmdb)
-[![npm downloads](https://img.shields.io/npm/dm/fastify-mariadb.svg?style=flat)](https://www.npmjs.com/package/fmdb)
+[![npm version](https://img.shields.io/npm/v/fastify-mariadb.svg?style=flat)](https://www.npmjs.com/package/@adminy/fmdb)
+[![npm downloads](https://img.shields.io/npm/dm/fastify-mariadb.svg?style=flat)](https://www.npmjs.com/package/@adminy/fmdb)
 <!-- [![Known Vulnerabilities](https://snyk.io/test/github/victor0801x/fastify-mariadb/badge.svg?targetFile=package.json&style=flat)](https://snyk.io/test/github/victor0801x/fastify-mariadb?targetFile=package.json) -->
 <!-- [![codecov](https://codecov.io/gh/victor0801x/fastify-mariadb/branch/master/graph/badge.svg?style=flat)](https://codecov.io/gh/victor0801x/fastify-mariadb) -->
 <!--[![Greenkeeper badge](https://badges.greenkeeper.io/victor0801x/fastify-mariadb.svg?style=flat)](https://greenkeeper.io/)-->
@@ -15,7 +15,7 @@ Under the hood the official [MariaDB Node.js connector](https://github.com/Maria
 ## Install
 
 ```
-npm i fmdb
+npm i @adminy/fmdb
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ Example:
 ```js
 const fastify = require('fastify')()
 
-fastify.register(require('fmdb'), {
+fastify.register(require('@adminy/fmdb'), {
   host: 'localhost',
   user: 'root',
   database: 'mysql',
@@ -58,7 +58,7 @@ As you can see there is no need to close the client, since is done internally.
 ```js
 const fastify = require('fastify')()
 
-fastify.register(require('fmdb'), {
+fastify.register(require('@adminy/fmdb'), {
   promise: true,
   connectionString: 'mariadb://root@localhost/mysql'
 })
