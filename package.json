@@ -1,5 +1,5 @@
 {
-  "name": "fmdb",
+  "name": "@adminy/fmdb",
   "version": "1.0.0",
   "description": "Fastify MariaDB plugin",
   "main": "index.js",
