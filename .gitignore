@@ -47,3 +47,5 @@ profile-*
 
 # webstorm
 .idea
+
+.vscode

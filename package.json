@@ -1,64 +1,24 @@
 {
-  "name": "fastify-mariadb",
-  "version": "2.0.0",
-  "description": "Fastify MariaDB connection Pool plugin",
+  "name": "fmdb",
+  "version": "1.0.0",
+  "description": "Fastify MariaDB plugin",
   "main": "index.js",
-  "engines": {
-    "node": ">= 10.13"
-  },
+  "author": "Marin Bivol <marin.bivol@fourtheorem.com>",
   "scripts": {
     "mariadb": "docker run -d -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes --rm mariadb",
-    "test": "tap test/*.test.js --cov",
-    "codecov:report": "tap test/*.test.js --coverage-report=lcov",
-    "codecov:upload": "tap test/*.test.js --coverage-report=text-lcov && codecov",
-    "lint": "standard --verbose | snazzy",
-    "lint:fix": "standard --fix",
-    "release": "release-it"
+    "test": "tap *.test.js --coverage --reporter=spec"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/victor0801x/fastify-mariadb.git"
-  },
-  "keywords": [
-    "fastify",
-    "mariadb",
-    "mysql",
-    "database",
-    "connection pool",
-    "sql"
-  ],
-  "author": "Jimmy Huang <victor0801x@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/victor0801x/fastify-mariadb/issues"
-  },
-  "homepage": "https://github.com/victor0801x/fastify-mariadb#readme",
   "dependencies": {
-    "fastify-plugin": "^2.3.4",
-    "mariadb": "^2.4.2",
-    "sqlstring": "^2.3.2"
+    "fastify-plugin": "^4.3.0",
+    "mariadb": "^3.0.2",
+    "sqlstring": "^2.3.3"
   },
   "devDependencies": {
-    "codecov": "^3.7.2",
-    "fastify": "^3.4.1",
-    "husky": "^4.3.0",
-    "release-it": "^14.0.3",
-    "snazzy": "^8.0.0",
-    "standard": "^14.3.4",
-    "tap": "^14.10.8"
+    "fastify": "^4.10.0",
+    "tap": "^16.3.2"
   },
-  "release-it": {
-    "git": {
-      "tagName": "v${version}",
-      "commitMessage": "chore: release v${version}"
-    },
-    "github": {
-      "release": true
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
+    "access": "public"
   }
 }
