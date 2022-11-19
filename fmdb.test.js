@@ -9,7 +9,7 @@ const options = {
   connectionLimit: 5
 }
 
-const dbFunctions = ['query', 'release', 'format', 'escape', 'escapeId']
+const dbFunctions = ['on', 'once', 'release', 'end', 'close', 'format', 'escape', 'escapeId']
 
 test('fastify maria db plugin', async ({test}) => {
   test('query async', async t => {
@@ -19,13 +19,21 @@ test('fastify maria db plugin', async ({test}) => {
     fastify.get('/', async req => {
       t.same(Object.keys(req.db), dbFunctions, 'db object in request')
       const res = await req.db.query('SELECT 1')
-      t.same(res, { '1': 1 }, 'db response')
+      t.same(res, [{ '1': 1 }], 'db response')
+      // Test multiple results
+      await req.db.query('CREATE TABLE IF NOT EXISTS users (id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(128) charset utf8)')
+      await req.db.query('DELETE FROM users')
+      await req.db.batch('INSERT INTO users (name) VALUES (?)', [['user1'], ['user2']])
+      const users = await req.db.query('SELECT * FROM users')
+      t.same(users.length, 2, 'multiple users in table')
+      await req.db.query('DROP TABLE users')
+      // end of multiple results test
       return res
     })
     await fastify.ready()
     const res = await fastify.inject({ method: 'GET', url: '/' })
     t.same(res.statusCode, 200, 'status code')
-    t.same(res.json(), { '1': 1 }, 'db response on API call')
+    t.same(res.json(), [{ '1': 1 }], 'db response on API call')
     fastify.close()
     t.end()
   })
@@ -36,14 +44,14 @@ test('fastify maria db plugin', async ({test}) => {
     fastify.after(err => t.ok(!err, 'error loading plugin'))
     fastify.get('/', (req, res) => {
       req.db.query('SELECT 1 AS `ping`').then(queryRes => {
-        t.same(queryRes, { ping: 1 }, 'db response')
+        t.same(queryRes, [{ ping: 1 }], 'db response')
         res.send(queryRes)
       })
     })
     fastify.ready().then(() => {
       fastify.inject({ method: 'GET', url: '/' }).then(res => {
         t.same(res.statusCode, 200, 'status code')
-        t.same(res.json(), { ping: 1 }, 'db response on API call')
+        t.same(res.json(), [{ ping: 1 }], 'db response on API call')
         fastify.close()
         t.end()  
       })
